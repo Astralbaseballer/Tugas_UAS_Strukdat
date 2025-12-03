@@ -231,6 +231,15 @@ void inorderTraversal(Node* root) {
     } 
 }
 
+// Fungsi untuk membersihkan memory
+void freeTree(Node* N) {
+    if ( N != NULL) {
+        freeTree(N->left);
+        freeTree(N->right);
+        free(N);
+    }
+}
+
 int main () {
     Node *root = NULL;
     int pilihan;
@@ -256,15 +265,73 @@ int main () {
 
         switch(pilihan) {
             case 1:
+                printf("\n====== Membuat acara baru ======\n");
+                printf("Masukkan id dengan format YYYYMMDDJJMM, misal 202512040650\n");
+                printf("untuk 4 Desember 2025, 06:50");
+                scanf("%lld", &timeID);
+                getchar();
+
+                printf("Masukkan judul acara: ");
+                fgets(title, 50, stdin);
+                title[strcspn(title, "\n")] = 0;
+                
+                printf("Masukkan deskripsi: ");
+                fgets(desc, 100, stdin);
+                desc[strcspn(desc, "\n")] = 0;
+                
+                printf("Masukkan durasi (menit): ");
+                scanf("%d", &durasiMenit);
+                
+                root = insert(root, timeID, title, desc, durasiMenit);
+                printf("\n Acara berhasil ditambahkan!\n");
+
                 break;
             case 2:
+                printf("\n====== Menghapus acara ======\n");
+                printf("Masukkan TimeID acara yang akan dihapus: ");
+                scanf("%lld", &timeID);
+                
+                if (search(root, timeID)) {
+                    root = deleteNode(root, timeID);
+                    printf("\nAcara berhasil dihapus!\n");
+                } else {
+                    printf("\nAcara tidak ditemukan!\n");
+                }
                 break;
             case 3:
+                printf("\n====== Cari acara ======\n");
+                printf("Masukkan TimeID: ");
+                scanf("%lld", &timeID);
+                
+                Node *pencarian = search(root, timeID);
+                if (pencarian) {
+                    printf("\nAcara Ditemukan:\n");
+                    printf("\n      Acara ditemukan     \n");
+                    printEvent(pencarian->data);
+                    printf("  -> Height: %d\n", pencarian->height);
+                } else {
+                    printf("\nAcara tidak ditemukan!\n");
+                }
                 break;
             case 4:
+                printf("\n========================================\n");
+                printf("       DAFTAR SEMUA Acara (Terurut)\n");
+                printf("========================================\n");
+                
+                if (root == NULL) {
+                    printf("\nBelum ada acara yang terjadwal.\n");
+                } else {
+                    inorderTraversal(root);
+                }
+                printf("========================================\n");
                 break;
             case 0:
+                printf("\nMembersihkan memory dan keluar...\n");
+                freeTree(root);
+                printf("Terima kasih telah menggunakan sistem penjadwalan!\n\n");
+                return 0;
                 break;
         }
     }
+    return 0;
 }
