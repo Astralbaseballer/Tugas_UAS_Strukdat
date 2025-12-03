@@ -33,12 +33,23 @@ int getHeight(Node *N) {
 
 // Fungsi ini menentukan rotasi suatu tree
 // berat cabang kiri - cabang kanan, tree tidak dapat berat sebelah
-int getBalance(Node *N){
-    if (N == NULL)
-        return 0;
-    return N->left->height - N->right->height;
-}
+int getBalance(Node *N) {
+    if (N == NULL) return 0;
 
+    // ambil tiggi kiri
+    int leftHeight = 0;
+    if (N->left != NULL) {
+        leftHeight = N->left->height;
+    }
+
+    // ambil tinggi kanan 
+    int rightHeight = 0;
+    if (N->right != NULL) {
+        rightHeight = N->right->height;
+    }
+
+    return leftHeight - rightHeight;
+}
 // Membuat Node baru
 Node* createNode(long long timeID, char* title, char* desc, int duration) {
     Node* newNode = (Node*)malloc(sizeof(Node));
