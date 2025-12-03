@@ -247,18 +247,30 @@ int main () {
     char title[50], desc[100];
     int durasiMenit;
 
-    printf("===================================");
-    printf("   Penjadwalan dengan AVL Tree     ");
-    printf("===================================");
+    //data awal
+    insert(root, 202512020700, "Basdat", "Temporer", 150);
+    insert(root, 202512020930, "Bela Negara", "Temporer", 150);
+    insert(root, 202512021200, "Istirahat", "Temporer", 60);
+    insert(root, 202512021500, "Kerkel", "Temporer", 120);
+    insert(root, 202512021700, "Istirahat", "Temporer", 120);
+    insert(root, 202512021900, "Belajar", "Temporer", 150);
+    insert(root, 202512030930, "Stakom", "Temporer", 150);
+    insert(root, 202512031300, "Pemlan", "Temporer", 150);
+    insert(root, 202512031530, "Kerkel", "Temporer", 120);
+    insert(root, 202512031900, "Belajar", "Temporer", 150);
+
+    printf("===================================\n");
+    printf("   Penjadwalan dengan AVL Tree     \n");
+    printf("===================================\n");
 
     while (1) {
-        printf("=============Pilihan==============");
+        printf("=============Pilihan==============\n");
         printf("1. Tambah acara         \n");
         printf("2. Hapus acara          \n");
         printf("3. Cari acara           \n");
         printf("4. Tampilkan semua acara\n");
         printf("0. Keluar               \n");
-        printf("===================================");
+        printf("===================================\n");
         printf("Pilihan: ");
         scanf("%d", &pilihan);
         getchar(); // Mengecualikan white space
@@ -267,7 +279,7 @@ int main () {
             case 1:
                 printf("\n====== Membuat acara baru ======\n");
                 printf("Masukkan id dengan format YYYYMMDDJJMM, misal 202512040650\n");
-                printf("untuk 4 Desember 2025, 06:50");
+                printf("untuk 4 Desember 2025, 06:50. TimeID: ");
                 scanf("%lld", &timeID);
                 getchar();
 
