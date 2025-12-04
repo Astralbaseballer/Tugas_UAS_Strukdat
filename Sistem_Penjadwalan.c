@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 
+int isAVL = 1;
+
 typedef struct {
     long long timeID; 
     char title[50];
@@ -125,8 +127,14 @@ Node* insert(Node* node, long long timeID, char* title, char* desc, int duration
     node->height = 1 + max(getHeight(node->left), getHeight(node->right)); 
     int balance = getBalance(node); 
  
-    // Control Flow tidak seimbang
- 
+    //Jika Memilih Mode BST
+
+     if (isAVL == 0) {
+        return node;
+
+    // Jika Memilih Mode AVL
+   
+    }
     // Kasus Kiri-Kiri (LL)
     if (balance > 1 && timeID < node->left->data.timeID) 
         return rightRotate(node); 
@@ -183,6 +191,10 @@ Node* deleteNode(Node *node, long long timeID) {
 
     // Update height
     node->height = 1 + max(getHeight(node->left), getHeight(node->right));
+
+    if (isAVL == 0) {
+        return node;
+    }
 
     // Get balance factor
     int balance = getBalance(node);
