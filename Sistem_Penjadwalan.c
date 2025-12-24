@@ -385,7 +385,7 @@ int main () {
                 if (search(root, timeID)) {
                     root = deleteNode(root, timeID);
                     saveTreeToCSV("ScheduleData.csv", root);
-                    printf("Deletetion success!\n");
+                    printf("Deletion success!\n");
                 } else printf("Not Found\n");
                 break;
             case 3:
